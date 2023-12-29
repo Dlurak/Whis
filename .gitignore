@@ -1,0 +1,4 @@
+chats/**.txt
+venv/
+__pycache__/
+output*
