@@ -11,7 +11,7 @@ def parse(path):
 
     for m in messages:
         match = re.match(
-                r'.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] ([\w\s]+): (.*)',
+                r'.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] ([^:]+): (.*)',
                 m,
                 re.DOTALL
             )
@@ -30,4 +30,5 @@ def parse(path):
     df = pd.DataFrame(data)
     df['date'] = pd.to_datetime(df['date'], format='%y.%m.%d, %H:%M:%S')
 
+    print(df['author'].unique())
     return df
