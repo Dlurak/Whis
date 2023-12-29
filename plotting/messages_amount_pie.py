@@ -9,5 +9,5 @@ def write_pie_chart(df: pd.DataFrame):
     author_values = list(sizes.index)
 
     plt.pie(sizes, labels=author_values)
-    plt.savefig('output.png')
+    plt.savefig('output/pie_amount.png')
     plt.close()
