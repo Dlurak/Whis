@@ -3,11 +3,11 @@ import pandas as pd
 
 
 def write_pie_chart(df: pd.DataFrame):
-    original_df = df
+    original_df = df.copy()
 
-    df['message'] = df['message'].str.len()
+    original_df['message'] = original_df['message'].str.len()
 
-    authors = df.groupby('author')
+    authors = original_df.groupby('author')
     authors = authors.agg({'message': 'sum'})
 
     author_values = list(authors.index)
@@ -16,5 +16,3 @@ def write_pie_chart(df: pd.DataFrame):
     plt.legend()
     plt.savefig('output/pie_length.png')
     plt.close()
-
-    df = original_df

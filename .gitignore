@@ -3,3 +3,4 @@ venv/
 __pycache__/
 output/*.png
 output/*.csv
+output/*.json

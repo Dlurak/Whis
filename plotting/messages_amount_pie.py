@@ -3,7 +3,8 @@ import pandas as pd
 
 
 def write_pie_chart(df: pd.DataFrame):
-    authors = df.groupby('author')
+    original_df = df.copy()
+    authors = original_df.groupby('author')
     sizes = authors.size()
 
     author_values = list(sizes.index)
