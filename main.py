@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import parse
 import os
 import plotting.messages_amount_pie as messages_amount_pie
