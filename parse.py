@@ -6,10 +6,12 @@ def parse(path):
     with open(path, 'r', newline='') as f:
         file = f.read()
 
-    messages = file.replace('^M', '\r\n').split('\r\n')[:-1]
+    content = re.sub(r'^M', '\r\n', file)
+
+    messages = re.sub(r'.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] (([^:]+)|(@[a-z]+:[a-z]+\.[a-z]+)):\r\n', '', content).split('\r\n')[:-1]
     data = []
 
-    for m in messages:
+    for i, m in enumerate(messages):
         match = re.match(
                 r'.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] (([^:]+)|(@[a-z]+:[a-z]+\.[a-z]+)): (.*)',
                 m,
@@ -30,6 +32,7 @@ def parse(path):
             })
         else:
             print(m)
+            print(f"Message {i}")
             raise Exception(f'Parse Error: {m}')
 
     df = pd.DataFrame(data)

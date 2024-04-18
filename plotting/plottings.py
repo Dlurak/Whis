@@ -4,9 +4,7 @@ import pandas as pd
 
 def write_chart_amount(inp: pd.DataFrame):
     df = inp.copy()
-    print(df)
     df['date'] = df['date'].dt.date
-    print(df)
 
     grouped = df.groupby(['author', df['date']]).size().reset_index(name='count')
     pivot_table = grouped.pivot(index='date', columns='author', values='count').fillna(0)
