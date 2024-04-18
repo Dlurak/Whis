@@ -7,12 +7,12 @@ def write_pie_chart(df: pd.DataFrame):
 
     original_df['message'] = original_df['message'].str.len()
 
-    authors = original_df.groupby('author')
-    authors = authors.agg({'message': 'sum'})
+    authors = original_df.groupby('author').agg({'message': 'sum'})
 
-    author_values = list(authors.index)
+    plt.pie(authors['message'], labels=list(authors.index))
 
-    plt.pie(authors['message'], labels=author_values)
-    plt.legend()
+    plt.legend(title="Authors")
+    plt.title("Total length of messages")
+
     plt.savefig('output/pie_length.png')
     plt.close()
