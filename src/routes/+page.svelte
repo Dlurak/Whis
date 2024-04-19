@@ -4,6 +4,7 @@
 	import { messages } from '$lib';
 
 	import { Icon, ArrowUpTray } from 'svelte-hero-icons';
+	import Visualizations from '$lib/components/Visualizations.svelte';
 </script>
 
 <div class="flex flex-col items-center justify-center bg-emerald-400 py-12">
@@ -31,3 +32,7 @@
 		</button>
 	</div>
 </div>
+
+{#if $messages}
+	<Visualizations messages={$messages} />
+{/if}

@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  '@devsnowflake/text-emoji-parser':
+    specifier: ^1.0.0
+    version: 1.0.0
+
 devDependencies:
   '@playwright/test':
     specifier: ^1.28.1
@@ -97,6 +102,10 @@ packages:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
     dev: true
+
+  /@devsnowflake/text-emoji-parser@1.0.0:
+    resolution: {integrity: sha512-FzXZOMSygtHqlmO1q03fADejdXjhX5znXol4Og9Lqn6f9inxehaRoxqPwNKYXMru1+dVQpZukuvRE/YKRKrj1g==}
+    dev: false
 
   /@esbuild/aix-ppc64@0.20.2:
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
