@@ -4,6 +4,7 @@
 	import { colors } from '$lib/utils/colors/colors';
 	import { arraysToObj } from '$lib/utils/objects/arrayToObj';
 	import Person from './visualizations/Person.svelte';
+	import TimeRange from './visualizations/TimeRange.svelte';
 
 	export let messages: Message[];
 
@@ -12,7 +13,7 @@
 </script>
 
 <div class="flex justify-center">
-	<div class="w-[96rem]">
+	<div class="w-[96rem] flex flex-col items-center justify-stretch">
 		<div
 			class="grid w-full grid-cols-[repeat(auto-fit,minmax(min(25rem,100%),1fr))] gap-14 px-14 py-4"
 		>
@@ -20,5 +21,7 @@
 				<Person name={author} {messages} color={authorColors[author]} />
 			{/each}
 		</div>
+
+		<TimeRange {messages} />
 	</div>
 </div>
