@@ -11,6 +11,7 @@
 	import '@carbon/charts-svelte/styles.css';
 	import MsgPerPerson from './visualizations/carts/MsgPerPerson.svelte';
 	import MsgPerDay from './visualizations/carts/MsgPerDay.svelte';
+	import MsgPerWeekday from './visualizations/carts/MsgPerWeekday.svelte';
 
 	export let messages: Message[];
 
@@ -44,6 +45,10 @@
 			<div class="grid grid-cols-4 gap-32">
 				<div>
 					<MsgPerPerson {messages} />
+				</div>
+
+				<div class="col-span-2">
+					<MsgPerWeekday {messages} />
 				</div>
 			</div>
 		</section>
