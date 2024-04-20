@@ -5,6 +5,7 @@
 
 	import { Icon, ArrowUpTray } from 'svelte-hero-icons';
 	import Visualizations from '$lib/components/Visualizations.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 </script>
 
 <div class="flex flex-col items-center justify-center bg-emerald-400 py-12">
@@ -22,7 +23,7 @@
 
 	<div class="py-16">
 		<button
-			class="flex items-center justify-center gap-2 rounded bg-emerald-500 px-12 py-4 text-xl shadow-sm transition-all hover:shadow-xl focus:outline-none focus:shadow-xl focus:bg-emerald-300"
+			class="flex items-center justify-center gap-2 rounded bg-emerald-500 px-12 py-4 text-xl shadow-sm transition-all hover:shadow-xl focus:bg-emerald-300 focus:shadow-xl focus:outline-none"
 			on:click={async () => {
 				readFile().then((content) => messages.set(parse(content)));
 			}}
@@ -34,5 +35,9 @@
 </div>
 
 {#if $messages}
-	<Visualizations messages={$messages} />
+	{#key $messages}
+		<Visualizations messages={$messages} />
+	{/key}
 {/if}
+
+<Footer />

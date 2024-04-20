@@ -18,7 +18,7 @@
 	};
 </script>
 
-<div class="max-w-[54rem] w-full font-bold">
+<div class="max-w-[54rem] w-full font-bold py-12">
 	<div class="flex flex-col">
 		<span class="text-3xl">First message</span>
 		<span class="text-5xl">{firstDate.toLocaleString(undefined, options)}</span>

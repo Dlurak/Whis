@@ -39,7 +39,9 @@
 
 	<ul>
 		<li>Total words: <b>{totalWordCountFormatted}</b></li>
-		<li>Most used emojis: <b>{emojis.slice(0, 3).join(', ')}</b></li>
+		{#if emojis.length > 0}
+			<li>Most used emojis: <b>{emojis.slice(0, 3).join(', ')}</b></li>
+		{/if}
 		<li>Longest message: <b>{longestLength}</b></li>
 		<li>Average words per message: <b>{Math.round(average(msgLengths) * 10) / 10}</b></li>
 	</ul>
