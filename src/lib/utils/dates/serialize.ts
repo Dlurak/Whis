@@ -8,6 +8,12 @@ export const removeTime = (d: Date) => {
 
 export const stringify = (d: Date) => `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
 
-export const weekday = (d: Date) => d.toLocaleDateString('en', {
+export const weekday = (d: Date) =>
+	d.toLocaleDateString('en', {
 		weekday: 'long'
+	});
+
+export const month = (d: Date) =>
+	d.toLocaleDateString('en', {
+		month: 'long'
 	});

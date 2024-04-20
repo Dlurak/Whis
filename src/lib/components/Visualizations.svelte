@@ -12,6 +12,7 @@
 	import MsgPerPerson from './visualizations/carts/MsgPerPerson.svelte';
 	import MsgPerDay from './visualizations/carts/MsgPerDay.svelte';
 	import MsgPerWeekday from './visualizations/carts/MsgPerWeekday.svelte';
+	import MsgPerMonth from './visualizations/carts/MsgPerMonth.svelte';
 
 	export let messages: Message[];
 
@@ -19,10 +20,10 @@
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
 </script>
 
-<div class="flex justify-center">
+<div class="flex justify-center py-12">
 	<div class="flex w-[min(96rem,90%)] flex-col items-center justify-stretch">
 		<div
-			class="grid w-full grid-cols-[repeat(auto-fit,minmax(min(25rem,100%),1fr))] gap-14 px-14 py-4"
+			class="grid w-full grid-cols-[repeat(auto-fit,minmax(min(25rem,100%),1fr))] gap-14 px-14 pb-4"
 		>
 			{#each authors as author}
 				<Person name={author} {messages} color={authorColors[author]} />
@@ -49,6 +50,10 @@
 
 				<div class="col-span-2">
 					<MsgPerWeekday {messages} />
+				</div>
+
+				<div>
+					<MsgPerMonth {messages} />
 				</div>
 			</div>
 		</section>
