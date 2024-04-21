@@ -21,10 +21,10 @@
 <div class="max-w-[54rem] w-full font-bold py-12">
 	<div class="flex flex-col">
 		<span class="text-3xl">First message</span>
-		<span class="text-5xl">{firstDate.toLocaleString(undefined, options)}</span>
+		<span class="text-5xl text-left">{firstDate.toLocaleString(undefined, options)}</span>
 	</div>
 	<div class="flex flex-col items-end">
-		<span class="text-5xl">{lastDate.toLocaleString(undefined, options)}</span>
+		<span class="text-5xl text-right">{lastDate.toLocaleString(undefined, options)}</span>
 		<span class="text-3xl">Last message</span>
 	</div>
 </div>
