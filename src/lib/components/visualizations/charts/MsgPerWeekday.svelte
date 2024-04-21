@@ -19,7 +19,7 @@
 		times: WEEKDAYS,
 		messages,
 		timeCallback: weekday
-	})
+	});
 
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
 </script>
@@ -29,9 +29,8 @@
 <RadarChart
 	{data}
 	options={{
-		title: "Messages per weekday per person",
+		title: 'Messages per weekday per person',
 		height: '400px',
-		color: { scale: authorColors },
-
+		color: { scale: authorColors }
 	}}
 />

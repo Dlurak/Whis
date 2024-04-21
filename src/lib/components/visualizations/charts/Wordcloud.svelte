@@ -41,7 +41,7 @@
 			class="h-1 w-full cursor-pointer appearance-none rounded-md bg-emerald-500"
 		/>
 	</div>
-	<span class="rounded-sm bg-emerald-500 px-3 py-1 flex items-center justify-center">
+	<span class="flex items-center justify-center rounded-sm bg-emerald-500 px-3 py-1">
 		{perAuthor}
 	</span>
 </div>

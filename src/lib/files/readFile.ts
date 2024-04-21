@@ -1,23 +1,11 @@
-export function readFile() {
+export function readBlob(blob: Blob) {
 	return new Promise<string>((resolve, reject) => {
-		const input = document.createElement('input');
-		input.type = 'file';
-		input.accept = '.txt';
+		const reader = new FileReader();
 
-		input.addEventListener('change', (event) => {
-			// @ts-ignore
-			const files = event.target?.files as Blob[]
+		reader.onload = (event) => resolve(`${event.target?.result}`);
 
-			if (files.length < 1) reject("No file selected")
-			const reader = new FileReader();
+		reader.onerror = () => reject('File could not be read!');
 
-			reader.onload = (event) => resolve(`${event.target?.result}`);
-
-			reader.onerror = () => reject('File could not be read!');
-
-			reader.readAsText(files[0]);
-		});
-
-		input.click();
+		reader.readAsText(blob);
 	});
 }

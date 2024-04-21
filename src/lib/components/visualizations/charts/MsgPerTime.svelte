@@ -33,12 +33,12 @@
 
 		axes: {
 			left: {
-				title: "Messages",
-				mapsTo: "value",
+				title: 'Messages',
+				mapsTo: 'value'
 			},
 			bottom: {
-				title: "Time",
-				mapsTo: "key",
+				title: 'Time',
+				mapsTo: 'key',
 				scaleType: ScaleTypes.LABELS
 			}
 		}

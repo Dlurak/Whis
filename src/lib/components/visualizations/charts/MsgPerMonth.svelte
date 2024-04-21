@@ -29,6 +29,6 @@
 	options={{
 		title: 'Messages per month',
 		height: '400px',
-		color: { scale: authorColors },
+		color: { scale: authorColors }
 	}}
 />

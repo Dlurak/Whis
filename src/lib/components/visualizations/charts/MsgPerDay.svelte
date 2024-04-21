@@ -20,7 +20,7 @@
 		<div
 			class="h-20 w-20 animate-spin rounded-full border-8 border-transparent border-t-green-400"
 		/>
-		<span class="text-gray-500 text-2xl">Processing</span>
+		<span class="text-2xl text-gray-500">Processing</span>
 	</div>
 {:then data}
 	<LineChart
@@ -39,11 +39,14 @@
 					mapsTo: 'key',
 
 					ticks: {
-						values: pick(data.map(({ key }) => key), 20)
+						values: pick(
+							data.map(({ key }) => key),
+							20
+						)
 					}
 				}
 			},
-			height: '400px',
+			height: '400px'
 		}}
 	/>
 {/await}

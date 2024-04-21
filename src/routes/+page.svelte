@@ -35,9 +35,9 @@
 	</div>
 {:else}
 	<div class="flex flex-col items-center justify-center gap-12 p-12 text-red-500">
-		<div class="h-36 w-36 flex items-center justify-center relative">
+		<div class="relative flex h-36 w-36 items-center justify-center">
 			<Icon src={ExclamationTriangle} class="h-full w-full" />
-			<Icon src={ExclamationTriangle} class="h-full w-full absolute blur-xl" />
+			<Icon src={ExclamationTriangle} class="absolute h-full w-full blur-xl" />
 		</div>
 
 		<span class="text-2xl">Something went wrong</span>

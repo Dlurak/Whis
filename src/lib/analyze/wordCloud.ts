@@ -11,13 +11,14 @@ export function wordCloud({ authors, messages }: WordCloudProps) {
 		const authorsMessages = messages.filter((m) => m.author === author);
 		const authorText = authorsMessages.map(({ message }) => message).join(' ');
 
-		return Object.entries(countObj(authorText)).map((entry) => ({
-			word: entry[0],
-			value: entry[1],
-			group: author
-		})).sort((a, b) => b.value - a.value)
+		return Object.entries(countObj(authorText))
+			.map((entry) => ({
+				word: entry[0],
+				value: entry[1],
+				group: author
+			}))
+			.sort((a, b) => b.value - a.value);
 	});
 
 	return counts;
 }
-

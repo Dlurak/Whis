@@ -1,6 +1,6 @@
-import type { Month } from "$lib/constants/dates/months";
-import type { Time } from "$lib/constants/dates/time";
-import type { Weekday } from "$lib/constants/dates/weekdays";
+import type { Month } from '$lib/constants/dates/months';
+import type { Time } from '$lib/constants/dates/time';
+import type { Weekday } from '$lib/constants/dates/weekdays';
 
 export const removeTime = (d: Date) => {
 	const day = d.getDate();
@@ -22,7 +22,8 @@ export const month = (d: Date) =>
 		month: 'long'
 	}) as Month;
 
-export const hour = (d: Date) => d.toLocaleTimeString('en', {
-	hour12: true,
-	hour: "numeric"
-}) as Time
+export const hour = (d: Date) =>
+	d.toLocaleTimeString('en', {
+		hour12: true,
+		hour: 'numeric'
+	}) as Time;

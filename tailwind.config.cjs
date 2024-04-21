@@ -13,9 +13,7 @@ const config = {
 		extend: {}
 	},
 
-	plugins: [
-		skeleton
-	]
+	plugins: [skeleton]
 };
 
 module.exports = config;

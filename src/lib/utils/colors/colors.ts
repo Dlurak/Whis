@@ -5,5 +5,5 @@ export const colors = [
 	'#22c55e', // lime
 	'#f97316', // orange
 	'#d946ef', // fuchsia
-	'#eab308', // yellow
-]
+	'#eab308' // yellow
+];
