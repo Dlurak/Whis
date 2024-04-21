@@ -18,22 +18,20 @@
 	const uniqueDays = removeDuplicates(days);
 </script>
 
-<div class="grid w-full grid-cols-1 md:grid-cols-2 roundedlg py-12 text-3xl font-bold">
-	<div
-		class="flex flex-col items-center bg-[--bg] py-5"
-		style:--bg={reversedColors[0]}
-	>
-		You have chatted for
-		<span class="text-6xl">{new Intl.NumberFormat().format(uniqueDays.length)}</span>
-		days
-	</div>
+<div
+	class="w-full py-12 text-3xl font-bold"
+>
+	<div class="grid w-full grid-cols-1 rounded-lg md:grid-cols-2 overflow-hidden">
+		<div class="flex flex-col items-center bg-[--bg] py-5" style:--bg={reversedColors[0]}>
+			You have chatted for
+			<span class="text-6xl">{new Intl.NumberFormat().format(uniqueDays.length)}</span>
+			days
+		</div>
 
-	<div
-		class="flex flex-col items-center bg-[--bg] py-5"
-		style:--bg={reversedColors[1]}
-	>
-		You have sent
-		<span class="text-6xl">{new Intl.NumberFormat().format(messages.length)}</span>
-		messages
+		<div class="flex flex-col items-center bg-[--bg] py-5" style:--bg={reversedColors[1]}>
+			You have sent
+			<span class="text-6xl">{new Intl.NumberFormat().format(messages.length)}</span>
+			messages
+		</div>
 	</div>
 </div>
