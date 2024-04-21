@@ -51,7 +51,9 @@
 		<section class="w-full">
 			<h2>Messages per</h2>
 
-			<div class="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(min(20rem,100%),1fr))] gap-12">
+			<div
+				class="grid w-full grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(min(20rem,100%),1fr))]"
+			>
 				<div><MsgPerPerson {messages} /></div>
 				<div><MsgPerMonth {messages} /></div>
 				<div><MsgPerWeekday {messages} /></div>

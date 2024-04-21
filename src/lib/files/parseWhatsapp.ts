@@ -1,31 +1,31 @@
+const regex =
+	/.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] (([^:]+)|(@[a-z]+:[a-z]+\.[a-z]+)):(.*)/s;
+
 export function parse(chat: string) {
 	const msgStrings = chat.split('\r\n').filter((i) => i);
 
-	const messages = msgStrings
-		.map((msg) => {
-			const [metadata, ...messageParts] = msg.split(': ');
-			const message = messageParts.join(': ');
+	const messages = msgStrings.map((msg) => {
+		const match = msg.match(regex);
+		if (!match) {
+			console.log(msg);
+			throw new Error('uprocessable');
+		}
 
-			if (message === '') return undefined;
+		const [_, dateStr, author, __, ___, message] = match;
 
-			const [rawDate, ...authorParts] = metadata.split('] ');
+		const parts = dateStr.split(/[.,: ]+/);
 
-			const author = authorParts.join('] ');
+		const date = new Date(
+			parseInt(parts[2]) + 2000,
+			parseInt(parts[1]) - 1,
+			parseInt(parts[0]),
+			parseInt(parts[3]),
+			parseInt(parts[4]),
+			parseInt(parts[5])
+		);
 
-			const parts = rawDate.replace(/[^\d,.: ]/g, '').split(/[.,: ]+/)
-
-			const date = new Date(
-				parseInt(parts[2]) + 2000,
-				parseInt(parts[1]) - 1,
-				parseInt(parts[0]),
-				parseInt(parts[3]),
-				parseInt(parts[4]),
-				parseInt(parts[5])
-			);
-
-			return { date, author, message };
-		})
-		.filter((i) => i) as Message[];
+		return { date, author, message };
+	});
 
 	return messages;
 }
