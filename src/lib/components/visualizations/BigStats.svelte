@@ -18,9 +18,9 @@
 	const uniqueDays = removeDuplicates(days);
 </script>
 
-<div class="grid w-full grid-cols-2 rounded-lg py-12 text-3xl font-bold">
+<div class="grid w-full grid-cols-1 md:grid-cols-2 roundedlg py-12 text-3xl font-bold">
 	<div
-		class="flex flex-col items-center rounded-bl-lg rounded-tl-lg bg-[--bg] py-5"
+		class="flex flex-col items-center bg-[--bg] py-5"
 		style:--bg={reversedColors[0]}
 	>
 		You have chatted for
@@ -29,7 +29,7 @@
 	</div>
 
 	<div
-		class="flex flex-col items-center rounded-br-lg rounded-tr-lg bg-[--bg] py-5"
+		class="flex flex-col items-center bg-[--bg] py-5"
 		style:--bg={reversedColors[1]}
 	>
 		You have sent

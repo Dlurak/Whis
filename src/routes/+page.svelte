@@ -6,13 +6,17 @@
 	import { Icon, ArrowUpTray } from 'svelte-hero-icons';
 	import Visualizations from '$lib/components/Visualizations.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+
+	let topHeight = 0;
+	let bottomHeight = 0;
 </script>
 
-<div class="flex flex-col items-center justify-center bg-emerald-400 py-12">
-	<div class="grid max-w-[92rem] grid-cols-3 py-16">
+<div
+	class="flex flex-col items-center justify-center bg-emerald-400 py-12"
+	bind:clientHeight={topHeight}
+>
+	<div class="flex w-full max-w-[92rem] items-center justify-evenly py-16 flex-col md:flex-row">
 		<h1 class="text-center font-extrabold italic text-white">Whis</h1>
-
-		<div />
 
 		<div class="flex items-center justify-center text-3xl text-gray-600">
 			<span class="max-w-72 hyphens-auto break-words">
@@ -34,10 +38,15 @@
 	</div>
 </div>
 
-{#if $messages}
-	{#key $messages}
-		<Visualizations messages={$messages} />
-	{/key}
-{/if}
+<main
+	class="min-h-[--height] outline"
+	style:--height={`calc(100svh - ${bottomHeight + topHeight}px)`}
+>
+	{#if $messages}
+		{#key $messages}
+			<Visualizations messages={$messages} />
+		{/key}
+	{/if}
+</main>
 
-<Footer />
+<Footer bind:height={bottomHeight} />

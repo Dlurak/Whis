@@ -23,7 +23,7 @@
 <div class="flex justify-center py-12">
 	<div class="flex w-[min(96rem,90%)] flex-col items-center justify-stretch">
 		<div
-			class="grid w-full grid-cols-[repeat(auto-fit,minmax(min(25rem,100%),1fr))] gap-14 px-14 pb-4"
+			class="grid w-full grid-cols-[repeat(auto-fit,minmax(min(25rem,100%),1fr))] gap-4 px-2 pb-4 md:gap-14 md:px-14"
 		>
 			{#each authors as author}
 				<Person name={author} {messages} color={authorColors[author]} />
@@ -37,24 +37,16 @@
 		<div class="w-full">
 			<h2>Timeline of messages</h2>
 
-				<MsgPerDay {messages} />
+			<MsgPerDay {messages} />
 		</div>
 
-		<section>
+		<section class="w-full">
 			<h2>Messages per</h2>
 
-			<div class="grid grid-cols-4 gap-32">
-				<div>
-					<MsgPerPerson {messages} />
-				</div>
-
-				<div class="col-span-2">
-					<MsgPerWeekday {messages} />
-				</div>
-
-				<div>
-					<MsgPerMonth {messages} />
-				</div>
+			<div class="grid w-full grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(min(20rem,100%),1fr))] gap-12">
+				<div><MsgPerPerson {messages} /></div>
+				<div><MsgPerMonth {messages} /></div>
+				<div class="col-span-1 sm:col-span-2"><MsgPerWeekday {messages} /></div>
 			</div>
 		</section>
 	</div>
