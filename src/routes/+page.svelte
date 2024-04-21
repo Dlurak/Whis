@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { messages, state } from '$lib';
+	import Settings from '$lib/components/Settings.svelte';
 
 	import Visualizations from '$lib/components/Visualizations.svelte';
 	import Export from '$lib/components/home/Export.svelte';
 	import Faq from '$lib/components/home/Faq.svelte';
 	import Header from '$lib/components/home/Header.svelte';
-	import { ExclamationTriangle, Icon } from 'svelte-hero-icons';
+	import { Cog, ExclamationTriangle, Icon } from 'svelte-hero-icons';
 </script>
 
 <svelte:head>
@@ -43,3 +44,5 @@
 		<span class="text-2xl">Something went wrong</span>
 	</div>
 {/if}
+
+<Settings />
