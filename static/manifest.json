@@ -1,0 +1,11 @@
+{
+	"short_name": "Whis",
+	"name": "Whis",
+	"description": "Analyze WhatsApp-Chats in seconds using Whis",
+
+	"background_color": "#ffffff",
+	"theme_color": "#34d399",
+
+	"orientation": "portrait-primary",
+	"display": "standalone"
+}
