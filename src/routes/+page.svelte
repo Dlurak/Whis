@@ -8,6 +8,10 @@
 	import { ExclamationTriangle, Icon } from 'svelte-hero-icons';
 </script>
 
+<svelte:head>
+	<title>Whis</title>
+</svelte:head>
+
 <Header />
 
 {#if $state === 'finished' && $messages}
