@@ -1,3 +1,5 @@
+export type Weekday = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"
+
 export const WEEKDAYS = [
 	"Monday",
 	"Tuesday",
@@ -6,4 +8,5 @@ export const WEEKDAYS = [
 	"Friday",
 	"Saturday",
 	"Sunday"
-] as const;
+] satisfies Weekday[]
+

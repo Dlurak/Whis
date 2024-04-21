@@ -9,10 +9,11 @@
 	import TimeRange from './visualizations/TimeRange.svelte';
 
 	import '@carbon/charts-svelte/styles.css';
-	import MsgPerPerson from './visualizations/carts/MsgPerPerson.svelte';
-	import MsgPerDay from './visualizations/carts/MsgPerDay.svelte';
-	import MsgPerWeekday from './visualizations/carts/MsgPerWeekday.svelte';
-	import MsgPerMonth from './visualizations/carts/MsgPerMonth.svelte';
+	import MsgPerPerson from './visualizations/charts/MsgPerPerson.svelte';
+	import MsgPerDay from './visualizations/charts/MsgPerDay.svelte';
+	import MsgPerWeekday from './visualizations/charts/MsgPerWeekday.svelte';
+	import MsgPerMonth from './visualizations/charts/MsgPerMonth.svelte';
+	import MsgPerTime from './visualizations/charts/MsgPerTime.svelte';
 
 	export let messages: Message[];
 
@@ -43,10 +44,11 @@
 		<section class="w-full">
 			<h2>Messages per</h2>
 
-			<div class="grid w-full grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(min(20rem,100%),1fr))] gap-12">
+			<div class="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(min(20rem,100%),1fr))] gap-12">
 				<div><MsgPerPerson {messages} /></div>
 				<div><MsgPerMonth {messages} /></div>
-				<div class="col-span-1 sm:col-span-2"><MsgPerWeekday {messages} /></div>
+				<div><MsgPerWeekday {messages} /></div>
+				<div class="col-span-1 sm:col-span-2 md:col-span-3"><MsgPerTime {messages} /></div>
 			</div>
 		</section>
 	</div>

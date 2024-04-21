@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { perTime } from '$lib/analyze/perTime';
+	import { MONTHS, type Month } from '$lib/constants/dates/months';
 	import type { Message } from '$lib/files/parseWhatsapp';
 	import { multiplyUntilLength } from '$lib/utils/arrays/length';
 	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';
@@ -10,33 +12,14 @@
 	export let messages: Message[];
 
 	const authors = removeDuplicates(messages.map(({ author }) => author));
-	const formatted = messages.map((m) => ({
-		...m,
-		date: month(m.date)
-	}));
-
-	const months = removeDuplicates(formatted.map(({ date }) => date));
-
-	const data = authors
-		.map((a) => {
-			return months.map((m) => {
-				const matching = formatted.filter(({ date, author }) => {
-					const dateMatches = date === m;
-					const authorMatches = author === a;
-
-					return dateMatches && authorMatches;
-				});
-
-				return {
-					feature: m,
-					score: matching.length,
-					product: a
-				};
-			});
-		})
-		.flat();
-
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
+
+	const data = perTime<Month>({
+		authors,
+		times: MONTHS,
+		messages,
+		timeCallback: month
+	});
 </script>
 
 <h3>Month</h3>
@@ -47,12 +30,5 @@
 		title: 'Messages per month',
 		height: '400px',
 		color: { scale: authorColors },
-		radar: {
-			axes: {
-				angle: 'feature',
-				value: 'score'
-			}
-		},
-		data: { groupMapsTo: 'product' }
 	}}
 />
