@@ -20,11 +20,20 @@ dependencies:
   d3-sankey:
     specifier: ^0.12.3
     version: 0.12.3
+  ua-parser-js:
+    specifier: ^1.0.37
+    version: 1.0.37
 
 devDependencies:
   '@playwright/test':
     specifier: ^1.28.1
     version: 1.43.1
+  '@skeletonlabs/skeleton':
+    specifier: ^2.9.1
+    version: 2.9.1(svelte@4.2.15)
+  '@skeletonlabs/tw-plugin':
+    specifier: ^0.4.0
+    version: 0.4.0(tailwindcss@3.4.3)
   '@sveltejs/adapter-auto':
     specifier: ^3.0.0
     version: 3.2.0(@sveltejs/kit@2.5.6)
@@ -40,6 +49,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.12.7
     version: 20.12.7
+  '@types/ua-parser-js':
+    specifier: ^0.7.39
+    version: 0.7.39
   '@typescript-eslint/eslint-plugin':
     specifier: ^7.0.0
     version: 7.7.0(@typescript-eslint/parser@7.7.0)(eslint@8.57.0)(typescript@5.4.5)
@@ -668,6 +680,23 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
+  /@skeletonlabs/skeleton@2.9.1(svelte@4.2.15):
+    resolution: {integrity: sha512-cWDYfhZ8kIahPxvoT9xmwb3utIgtDpVQddNoQHnssxZZbqefl5z3cvWbuvvqEjewDxwKq4Zw4MtPcaT9nxojmQ==}
+    peerDependencies:
+      svelte: ^3.56.0 || ^4.0.0
+    dependencies:
+      esm-env: 1.0.0
+      svelte: 4.2.15
+    dev: true
+
+  /@skeletonlabs/tw-plugin@0.4.0(tailwindcss@3.4.3):
+    resolution: {integrity: sha512-v6Y4deBq9ByRx3kTRGgekhhYkWEYgNNNu8UXOwJngCStB7w8SwmbNFSeHkluxMbgCgMnJyp220EMpw9nj/rEsQ==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0'
+    dependencies:
+      tailwindcss: 3.4.3
+    dev: true
+
   /@steeze-ui/heroicons@2.3.0:
     resolution: {integrity: sha512-tVOamjAd9ZzXgDwVKwbA3K+o86Z1ks/IMvqdgoCf9hKeGINVUIlAlGhM3wdpSmt7brIoBLgR70wlnsXGytZk9g==}
     dev: true
@@ -774,6 +803,10 @@ packages:
 
   /@types/semver@7.5.8:
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
+    dev: true
+
+  /@types/ua-parser-js@0.7.39:
+    resolution: {integrity: sha512-P/oDfpofrdtF5xw433SPALpdSchtJmY7nsJItf8h3KXqOslkbySh8zq4dSWXH2oTjRvJ5PczVEoCZPow6GicLg==}
     dev: true
 
   /@typescript-eslint/eslint-plugin@7.7.0(@typescript-eslint/parser@7.7.0)(eslint@8.57.0)(typescript@5.4.5):
@@ -3293,6 +3326,10 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
+
+  /ua-parser-js@1.0.37:
+    resolution: {integrity: sha512-bhTyI94tZofjo+Dn8SN6Zv8nBDvyXTymAdM3LDI/0IboIUwTu1rEhW7v2TfiVsoYWgkQ4kOVqnI8APUFbIQIFQ==}
+    dev: false
 
   /ufo@1.5.3:
     resolution: {integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw==}

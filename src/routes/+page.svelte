@@ -5,21 +5,16 @@
 
 	import { Icon, ArrowUpTray } from 'svelte-hero-icons';
 	import Visualizations from '$lib/components/Visualizations.svelte';
-	import Footer from '$lib/components/Footer.svelte';
-
-	let topHeight = 0;
-	let bottomHeight = 0;
+	import Export from '$lib/components/home/Export.svelte';
+	import Faq from '$lib/components/home/Faq.svelte';
 </script>
 
-<div
-	class="flex flex-col items-center justify-center bg-emerald-400 py-12"
-	bind:clientHeight={topHeight}
->
-	<div class="flex w-full max-w-[92rem] items-center justify-evenly py-16 flex-col md:flex-row">
+<div class="flex flex-col items-center justify-center bg-emerald-400">
+	<div class="flex w-full max-w-[92rem] flex-col items-center justify-evenly py-16 md:flex-row">
 		<h1 class="text-center font-extrabold italic text-white">Whis</h1>
 
 		<div class="flex items-center justify-center text-3xl text-gray-600">
-			<span class="max-w-72 hyphens-auto break-words">
+			<span class="max-w-96 hyphens-auto break-words">
 				The best way to analyze your WhatsApp chats!
 			</span>
 		</div>
@@ -32,21 +27,22 @@
 				readFile().then((content) => messages.set(parse(content)));
 			}}
 		>
-			<Icon src={ArrowUpTray} mini class="h-6" />
-			<div class="w-full whitespace-nowrap">Load file</div>
+			<Icon src={ArrowUpTray} mini class="h-6 w-6" />
+			<div class="whitespace-nowrap">Load file</div>
 		</button>
 	</div>
 </div>
 
-<main
-	class="min-h-[--height] outline"
-	style:--height={`calc(100svh - ${bottomHeight + topHeight}px)`}
->
-	{#if $messages}
-		{#key $messages}
-			<Visualizations messages={$messages} />
-		{/key}
-	{/if}
-</main>
+{#if $messages}
+	{#key $messages}
+		<Visualizations messages={$messages} />
+	{/key}
+{:else}
+	<div class="flex justify-center py-12">
+		<div class="max-w-[92rem] px-4 w-full">
+			<Export />
 
-<Footer bind:height={bottomHeight} />
+			<Faq />
+		</div>
+	</div>
+{/if}
