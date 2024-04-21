@@ -14,6 +14,7 @@
 	import MsgPerWeekday from './visualizations/charts/MsgPerWeekday.svelte';
 	import MsgPerMonth from './visualizations/charts/MsgPerMonth.svelte';
 	import MsgPerTime from './visualizations/charts/MsgPerTime.svelte';
+	import Wordcloud from './visualizations/charts/Wordcloud.svelte';
 
 	export let messages: Message[];
 
@@ -39,6 +40,12 @@
 			<h2>Timeline of messages</h2>
 
 			<MsgPerDay {messages} />
+		</div>
+
+		<div class="w-full">
+			<h2>Wordcloud</h2>
+
+			<Wordcloud {messages} />
 		</div>
 
 		<section class="w-full">
