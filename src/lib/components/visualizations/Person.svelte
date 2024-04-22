@@ -6,6 +6,9 @@
 
 	import { parse } from '@devsnowflake/text-emoji-parser';
 	import { blackOrWhiteText } from '$lib/utils/colors/contrast';
+	import { emoticon } from 'emoticon';
+	import { regexFromStr } from '$lib/utils/strings/regex';
+	import Emoticon from './Person/Emoticon.svelte';
 
 	export let name: string;
 	export let color: string;
@@ -24,12 +27,19 @@
 	const totalWordCount = sum(msgLengths);
 	const totalWordCountFormatted = new Intl.NumberFormat('en').format(totalWordCount);
 
-	const entireText = msges.map(({ message }) => message).join('');
+	const entireText = msges.map(({ message }) => message).join(' ');
 
 	const emojiCounts = count(parse(entireText).map(({ text }) => text));
 	const emojis: string[] = Object.entries(emojiCounts)
 		.sort((a, b) => b[1] - a[1])
 		.map(([i]) => i);
+
+	const emoticonsRegexes = emoticon.flatMap((e) => e.emoticons).map(regexFromStr);
+	const emoticonMatchesUnsorted = emoticonsRegexes
+		.map((reg) => entireText.match(reg))
+		.filter((i) => i) as RegExpMatchArray[];
+
+	const emoticonMatches = emoticonMatchesUnsorted.sort((a, b) => b.length - a.length);
 </script>
 
 <div class="w-full rounded-sm p-4 outline outline-2 outline-gray-300">
@@ -45,7 +55,22 @@
 		<li>Total words: <b>{totalWordCountFormatted}</b></li>
 		<li>Total messages: <b>{fmt(msges.length)}</b></li>
 		{#if emojis.length > 0}
-			<li>Most used emojis: <b>{emojis.slice(0, 3).join(', ')}</b></li>
+			<li>
+				Most used emojis:
+				{#each emojis.slice(0, 5) as e}
+					<b class="px-1">{e}</b>
+				{/each}
+			</li>
+		{/if}
+		{#if emoticonMatches.length > 0}
+			<li>
+				Most used emoticons:
+				<b>
+					{#each emoticonMatches.slice(0, 5) as e}
+						<Emoticon emoticon={e[0].trim()} amount={e.length} />
+					{/each}
+				</b>
+			</li>
 		{/if}
 		<li>Longest message: <b>{longestLength}</b> Words</li>
 		<li>Average words per message: <b>{Math.round(average(msgLengths) * 10) / 10}</b></li>
