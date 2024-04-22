@@ -6,23 +6,27 @@ interface WordCloudProps {
 	messages: Message[];
 }
 
-type AuthorCounts = Record<string, Record<string, number>>
+type AuthorCounts = Record<string, Record<string, number>>;
 
 export function countsPerAuthor(props: WordCloudProps) {
-	const entries =  props.authors.map((author) => {
+	const entries = props.authors.map((author) => {
 		const authorsMessages = props.messages.filter((m) => m.author === author);
 		const authorText = authorsMessages.map(({ message }) => message).join(' ');
 
-		return  [author, countObj(authorText)] as const
-	})
+		return [author, countObj(authorText)] as const;
+	});
 
-	return Object.fromEntries(entries) satisfies AuthorCounts
+	return Object.fromEntries(entries) satisfies AuthorCounts;
 }
 
 export function wordCloud(counts: AuthorCounts) {
 	return Object.entries(counts).map(([author, counts]) => {
-		return Object.entries(counts).map(([word, value]) => ({
-			word, value, group: author
-		})) .sort((a, b) => b.value - a.value)
+		return Object.entries(counts)
+			.map(([word, value]) => ({
+				word,
+				value,
+				group: author
+			}))
+			.sort((a, b) => b.value - a.value);
 	});
 }

@@ -1,10 +1,15 @@
 import { describe, it, expect } from 'vitest';
-import { millisecondsToDays } from './convert';
+import { convertMillisecs } from './convert';
 
 describe('converts from milliseconds to other formats', () => {
-	it('converts to days', () => {
-		expect(millisecondsToDays(1)).toBe(1)
-		expect(millisecondsToDays(86_400_000)).toBe(1)
-		expect(millisecondsToDays(86_400_001)).toBe(2)
+	it('converts', () => {
+		expect(convertMillisecs(86_400_000, 'Days')).toBe(1);
+		expect(convertMillisecs(86_400_001, 'Days')).toBe(2);
+
+		expect(convertMillisecs(86_400_000, 'Hours')).toBe(24);
+		expect(convertMillisecs(86_400_001, 'Hours')).toBe(25);
+
+		expect(convertMillisecs(86_400_000, 'Mins')).toBe(24 * 60);
+		expect(convertMillisecs(86_400_001, 'Mins')).toBe(24 * 60 + 1);
 	});
 });

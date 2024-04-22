@@ -6,8 +6,8 @@
 	import { colors } from '$lib/utils/colors/colors';
 	import { wordCloud } from '$lib/analyze/wordCloud';
 
-	export let counts: Record<string, Record<string, number>>
-	export let  authors: string[]
+	export let counts: Record<string, Record<string, number>>;
+	export let authors: string[];
 
 	const authorAmount = authors.length;
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authorAmount));

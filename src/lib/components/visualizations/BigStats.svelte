@@ -2,7 +2,7 @@
 	import type { Message } from '$lib/files/parseWhatsapp';
 	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';
 	import { colors } from '$lib/utils/colors/colors';
-	import { DAY_IN_MS, millisecondsToDays } from '$lib/utils/dates/convert';
+	import { DAY_IN_MS, convertMillisecs } from '$lib/utils/dates/convert';
 	import { svocal } from '$lib/utils/svocal';
 
 	export let messages: Message[];
@@ -29,7 +29,7 @@
 	$: endDate = $upToTodaySetting ? nowDate : normalDate;
 
 	// Add one day (in_ms) because the span should be inclusive
-	$: daySpan = millisecondsToDays(endDate.getTime() + DAY_IN_MS - firstTimestamp);
+	$: daySpan = convertMillisecs(endDate.getTime() + DAY_IN_MS - firstTimestamp, 'Days');
 
 	const fmt = (n: number) => new Intl.NumberFormat().format(n);
 </script>

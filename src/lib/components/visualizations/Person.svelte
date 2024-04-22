@@ -10,10 +10,10 @@
 	export let name: string;
 	export let color: string;
 	export let messages: Message[];
-	export let wordcloud: Record<string, Record<string, number>>
+	export let wordcloud: Record<string, Record<string, number>>;
 
-	const fmt =  new  Intl.NumberFormat().format
-	const wordcount = Object.keys(wordcloud[name]).length
+	const fmt = new Intl.NumberFormat().format;
+	const wordcount = Object.keys(wordcloud[name]).length;
 
 	const msges = messages.filter((m) => m.author === name);
 

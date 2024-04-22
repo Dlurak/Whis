@@ -23,8 +23,9 @@
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
 
 	const wordcounts = countsPerAuthor({
-		authors, messages
-	})
+		authors,
+		messages
+	});
 </script>
 
 <div class="flex justify-center py-12">
