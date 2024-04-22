@@ -1,3 +1,4 @@
+import { URL_REGEX } from '$lib/constants/regex';
 import type { Message } from '$lib/files/parseWhatsapp';
 import { countObj } from '$lib/utils/strings/words';
 
@@ -11,7 +12,12 @@ type AuthorCounts = Record<string, Record<string, number>>;
 export function countsPerAuthor(props: WordCloudProps) {
 	const entries = props.authors.map((author) => {
 		const authorsMessages = props.messages.filter((m) => m.author === author);
-		const authorText = authorsMessages.map(({ message }) => message).join(' ');
+		const authorText = authorsMessages
+			.map(({ message }) => message)
+			.join(' ')
+			.toLowerCase()
+			.replace(URL_REGEX, '')
+			.replace(/[.,-_#'"!?%/(){}\[\]]/g, '');
 
 		return [author, countObj(authorText)] as const;
 	});

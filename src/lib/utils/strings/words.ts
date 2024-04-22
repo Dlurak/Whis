@@ -1,7 +1,7 @@
 export const countWords = (str: string) => str.split(/\s+/).length;
 
 export const countObj = (str: string) => {
-	const words = str.replace(/[(,.]/, '').split(/\s+/);
+	const words = str.split(/\s+/);
 
 	let result: Record<string, number> = {};
 
