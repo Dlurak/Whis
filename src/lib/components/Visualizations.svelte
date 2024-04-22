@@ -5,7 +5,7 @@
 	import { colors } from '$lib/utils/colors/colors';
 	import { arraysToObj } from '$lib/utils/objects/arrayToObj';
 	import BigStats from './visualizations/BigStats.svelte';
-	import Person from './visualizations/Person.svelte';
+	import Person from './visualizations/Person/Person.svelte';
 	import TimeRange from './visualizations/TimeRange.svelte';
 
 	import '@carbon/charts-svelte/styles.css';
@@ -15,7 +15,7 @@
 	import MsgPerMonth from './visualizations/charts/MsgPerMonth.svelte';
 	import MsgPerTime from './visualizations/charts/MsgPerTime.svelte';
 	import Wordcloud from './visualizations/charts/Wordcloud.svelte';
-	import { countsPerAuthor, wordCloud } from '$lib/analyze/wordCloud';
+	import { countsPerAuthor } from '$lib/analyze/wordCloud';
 
 	export let messages: Message[];
 

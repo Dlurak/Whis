@@ -1,14 +1,17 @@
 <script lang="ts">
 	import { offset, flip, shift } from 'svelte-floating-ui/dom';
 	import { createFloatingActions } from 'svelte-floating-ui';
-	import { emoticon as allEmoticon } from 'emoticon';
 
-	export let emoticon: string;
+	export let emoji: string;
 	export let amount: number;
 
-	const fullEmoticon = allEmoticon.find(({ emoticons }) => emoticons.includes(emoticon));
+	type Metadata = {
+		emoji: string;
+		name: string;
+		description: string;
+	};
 
-	const allRawEmo = allEmoticon.flatMap(({ emoticons }) => emoticons);
+	export let metadata: Metadata | null = null;
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		strategy: 'absolute',
@@ -26,18 +29,19 @@
 	on:mouseleave={() => (showTooltip = false)}
 	role="listitem"
 >
-	{emoticon}
+	{emoji}
 </b>
 
-{#if showTooltip && fullEmoticon}
+{#if showTooltip}
 	<div
 		use:floatingContent
 		class="absolute flex flex-col gap-1 rounded bg-white bg-opacity-50 px-4 py-2 shadow-md backdrop-blur-lg"
 	>
-		<h4 class="capitalize">{fullEmoticon.emoji} {fullEmoticon.name}</h4>
+		{#if metadata}
+			<h4 class="capitalize">{metadata.emoji} {metadata.name}</h4>
 
-		<span class="text-sm capitalize text-gray-700">{fullEmoticon.description}</span>
-
-		<span class="text-md">Used {emoticon} {amount} times</span>
+			<span class="text-sm capitalize text-gray-700">{metadata.description}</span>
+		{/if}
+		<span class="text-md">Used {emoji} {amount} times</span>
 	</div>
 {/if}

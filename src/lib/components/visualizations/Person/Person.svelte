@@ -8,7 +8,7 @@
 	import { blackOrWhiteText } from '$lib/utils/colors/contrast';
 	import { emoticon } from 'emoticon';
 	import { regexFromStr } from '$lib/utils/strings/regex';
-	import Emoticon from './Person/Emoticon.svelte';
+	import Emoji from './Emoji.svelte';
 
 	export let name: string;
 	export let color: string;
@@ -40,6 +40,9 @@
 		.filter((i) => i) as RegExpMatchArray[];
 
 	const emoticonMatches = emoticonMatchesUnsorted.sort((a, b) => b.length - a.length);
+
+	const findMetadata = (emoji: string) =>
+		emoticon.find(({ emoticons }) => emoticons.includes(emoji));
 </script>
 
 <div class="w-full rounded-sm p-4 outline outline-2 outline-gray-300">
@@ -58,7 +61,7 @@
 			<li>
 				Most used emojis:
 				{#each emojis.slice(0, 5) as e}
-					<b class="px-1">{e}</b>
+					<Emoji emoji={e} amount={emojiCounts[e]} />
 				{/each}
 			</li>
 		{/if}
@@ -67,7 +70,9 @@
 				Most used emoticons:
 				<b>
 					{#each emoticonMatches.slice(0, 5) as e}
-						<Emoticon emoticon={e[0].trim()} amount={e.length} />
+						{@const emoji = e[0].trim()}
+
+						<Emoji {emoji} amount={e.length} metadata={findMetadata(emoji)} />
 					{/each}
 				</b>
 			</li>
