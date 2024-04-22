@@ -1,20 +1,18 @@
 <script lang="ts">
-	import type { Message } from '$lib/files/parseWhatsapp';
 	import '@carbon/charts-svelte/styles.css';
 	import { WordCloudChart } from '@carbon/charts-svelte';
-	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';
 	import { arraysToObj } from '$lib/utils/objects/arrayToObj';
 	import { multiplyUntilLength } from '$lib/utils/arrays/length';
 	import { colors } from '$lib/utils/colors/colors';
 	import { wordCloud } from '$lib/analyze/wordCloud';
 
-	export let messages: Message[];
+	export let counts: Record<string, Record<string, number>>
+	export let  authors: string[]
 
-	const authors = removeDuplicates(messages.map(({ author }) => author));
 	const authorAmount = authors.length;
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authorAmount));
 
-	const data = wordCloud({ authors, messages });
+	const data = wordCloud(counts);
 
 	let perAuthor = 100 / authorAmount;
 

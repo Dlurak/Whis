@@ -6,7 +6,7 @@
 	import Export from '$lib/components/home/Export.svelte';
 	import Faq from '$lib/components/home/Faq.svelte';
 	import Header from '$lib/components/home/Header.svelte';
-	import { Cog, ExclamationTriangle, Icon } from 'svelte-hero-icons';
+	import { ExclamationTriangle, Icon } from 'svelte-hero-icons';
 </script>
 
 <svelte:head>

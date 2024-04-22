@@ -10,6 +10,10 @@
 	export let name: string;
 	export let color: string;
 	export let messages: Message[];
+	export let wordcloud: Record<string, Record<string, number>>
+
+	const fmt =  new  Intl.NumberFormat().format
+	const wordcount = Object.keys(wordcloud[name]).length
 
 	const msges = messages.filter((m) => m.author === name);
 
@@ -39,10 +43,12 @@
 
 	<ul>
 		<li>Total words: <b>{totalWordCountFormatted}</b></li>
+		<li>Total messages: <b>{fmt(msges.length)}</b></li>
 		{#if emojis.length > 0}
 			<li>Most used emojis: <b>{emojis.slice(0, 3).join(', ')}</b></li>
 		{/if}
 		<li>Longest message: <b>{longestLength}</b> Words</li>
 		<li>Average words per message: <b>{Math.round(average(msgLengths) * 10) / 10}</b></li>
+		<li>Wordstock (unique words used): <b>{fmt(wordcount)}</b></li>
 	</ul>
 </div>

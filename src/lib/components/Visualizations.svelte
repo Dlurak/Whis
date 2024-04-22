@@ -15,11 +15,16 @@
 	import MsgPerMonth from './visualizations/charts/MsgPerMonth.svelte';
 	import MsgPerTime from './visualizations/charts/MsgPerTime.svelte';
 	import Wordcloud from './visualizations/charts/Wordcloud.svelte';
+	import { countsPerAuthor, wordCloud } from '$lib/analyze/wordCloud';
 
 	export let messages: Message[];
 
 	const authors = removeDuplicates(messages.map(({ author }) => author));
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
+
+	const wordcounts = countsPerAuthor({
+		authors, messages
+	})
 </script>
 
 <div class="flex justify-center py-12">
@@ -28,7 +33,7 @@
 			class="grid w-full grid-cols-[repeat(auto-fit,minmax(min(25rem,100%),1fr))] gap-4 px-2 pb-4 md:gap-14 md:px-14"
 		>
 			{#each authors as author}
-				<Person name={author} {messages} color={authorColors[author]} />
+				<Person name={author} {messages} color={authorColors[author]} wordcloud={wordcounts} />
 			{/each}
 		</div>
 
@@ -45,7 +50,7 @@
 		<div class="w-full">
 			<h2>Wordcloud</h2>
 
-			<Wordcloud {messages} />
+			<Wordcloud counts={wordcounts} {authors} />
 		</div>
 
 		<section class="w-full">
