@@ -9,6 +9,7 @@
 	import { emoticon } from 'emoticon';
 	import { regexFromStr } from '$lib/utils/strings/regex';
 	import Emoji from './Emoji.svelte';
+	import { svocal } from '$lib/utils/svocal';
 
 	export let name: string;
 	export let color: string;
@@ -43,6 +44,8 @@
 
 	const findMetadata = (emoji: string) =>
 		emoticon.find(({ emoticons }) => emoticons.includes(emoji));
+
+	const emojiAmount = svocal('amountEmoji');
 </script>
 
 <div class="w-full rounded-sm p-4 outline outline-2 outline-gray-300">
@@ -57,19 +60,19 @@
 	<ul>
 		<li>Total words: <b>{totalWordCountFormatted}</b></li>
 		<li>Total messages: <b>{fmt(msges.length)}</b></li>
-		{#if emojis.length > 0}
+		{#if emojis.length > 0 && $emojiAmount > 0}
 			<li>
 				Most used emojis:
-				{#each emojis.slice(0, 5) as e}
+				{#each emojis.slice(0, $emojiAmount) as e}
 					<Emoji emoji={e} amount={emojiCounts[e]} />
 				{/each}
 			</li>
 		{/if}
-		{#if emoticonMatches.length > 0}
+		{#if emoticonMatches.length > 0 && $emojiAmount > 0}
 			<li>
 				Most used emoticons:
 				<b>
-					{#each emoticonMatches.slice(0, 5) as e}
+					{#each emoticonMatches.slice(0, $emojiAmount) as e}
 						{@const emoji = e[0].trim()}
 
 						<Emoji {emoji} amount={e.length} metadata={findMetadata(emoji)} />

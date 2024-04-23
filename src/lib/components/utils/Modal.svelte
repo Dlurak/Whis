@@ -29,7 +29,7 @@
 
 <dialog
 	bind:this={dialogElement}
-	class="min-w-[min(24rem,100%)] rounded-md bg-gray-200 shadow-2xl backdrop:bg-black backdrop:opacity-50 backdrop:saturate-50"
+	class="min-w-[min(24rem,90%)] rounded-md bg-gray-200 shadow-2xl backdrop:bg-black backdrop:opacity-50 backdrop:saturate-50"
 >
 	<div class="flex items-center gap-6 border-b-gray-500 bg-gray-300 px-3 py-1">
 		<div class="w-full">

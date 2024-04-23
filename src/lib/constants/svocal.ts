@@ -2,6 +2,10 @@ export const SVOCAL = {
 	upToToday: {
 		key: 'settings.upToToday',
 		default: true
+	},
+	amountEmoji: {
+		key: 'settings.amountEmoji',
+		default: 5
 	}
 };
 
