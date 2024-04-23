@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { offset, flip, shift } from 'svelte-floating-ui/dom';
 	import { createFloatingActions } from 'svelte-floating-ui';
+	import { useHover } from 'nutzlich';
 
 	export let emoji: string;
 	export let amount: number;
@@ -19,20 +20,14 @@
 		middleware: [offset(6), flip(), shift()]
 	});
 
-	let showTooltip = false;
+	const [showTooltip, hoverRef] = useHover();
 </script>
 
-<b
-	class="px-1"
-	use:floatingRef
-	on:mouseenter={() => (showTooltip = true)}
-	on:mouseleave={() => (showTooltip = false)}
-	role="listitem"
->
+<b class="px-1" use:floatingRef use:hoverRef>
 	{emoji}
 </b>
 
-{#if showTooltip}
+{#if $showTooltip}
 	<div
 		use:floatingContent
 		class="absolute flex flex-col gap-1 rounded bg-white bg-opacity-50 px-4 py-2 shadow-md backdrop-blur-lg"
