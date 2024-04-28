@@ -10,6 +10,7 @@
 	import { regexFromStr } from '$lib/utils/strings/regex';
 	import Emoji from './Emoji.svelte';
 	import { svocal } from '$lib/utils/svocal';
+	import { filterMsges } from '$lib/utils/messages/filter';
 
 	export let name: string;
 	export let color: string;
@@ -21,14 +22,16 @@
 
 	const msges = messages.filter((m) => m.author === name);
 
-	const msgLengths = msges.map(({ message }) => countWords(message));
+	const msgLengths = filterMsges(msges).map(({ message }) => countWords(message));
 
 	const longestLength = msgLengths.sort((a, b) => b - a)[0];
 
 	const totalWordCount = sum(msgLengths);
 	const totalWordCountFormatted = new Intl.NumberFormat('en').format(totalWordCount);
 
-	const entireText = msges.map(({ message }) => message).join(' ');
+	const entireText = filterMsges(msges)
+		.map(({ message }) => message)
+		.join(' ');
 
 	const emojiCounts = count(parse(entireText).map(({ text }) => text));
 	const emojis: string[] = Object.entries(emojiCounts)

@@ -13,7 +13,7 @@ export function countsPerAuthor(props: WordCloudProps) {
 	const entries = props.authors.map((author) => {
 		const authorsMessages = props.messages.filter((m) => m.author === author);
 		const authorText = authorsMessages
-			.map(({ message }) => message)
+			.map((msg) => (msg.type === 'message' ? msg.message : ''))
 			.join(' ')
 			.toLowerCase()
 			.replace(URL_REGEX, '')

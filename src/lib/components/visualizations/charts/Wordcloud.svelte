@@ -19,8 +19,6 @@
 	$: sliced = data.flatMap((block) => block.slice(0, perAuthor));
 </script>
 
-<h3>Weekday</h3>
-
 <WordCloudChart
 	data={sliced}
 	options={{
