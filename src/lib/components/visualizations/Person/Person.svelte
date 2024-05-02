@@ -49,6 +49,8 @@
 		emoticon.find(({ emoticons }) => emoticons.includes(emoji));
 
 	const emojiAmount = svocal('amountEmoji');
+
+	const voiceAmount = msges.filter(({ type }) => type === 'audio').length;
 </script>
 
 <div class="w-full rounded-sm p-4 outline outline-2 outline-gray-300">
@@ -84,6 +86,7 @@
 			</li>
 		{/if}
 		<li>Longest message: <b>{longestLength}</b> Words</li>
+		<li>Voice Messages: <b>{voiceAmount}</b></li>
 		<li>Average words per message: <b>{Math.round(average(msgLengths) * 10) / 10}</b></li>
 		<li>Wordstock (unique words used): <b>{fmt(wordcount)}</b></li>
 	</ul>

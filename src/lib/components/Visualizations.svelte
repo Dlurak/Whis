@@ -37,9 +37,7 @@
 				<Person name={author} {messages} color={authorColors[author]} wordcloud={wordcounts} />
 			{/each}
 		</div>
-
 		<TimeRange {messages} />
-
 		<BigStats {messages} />
 
 		<div class="w-full">
