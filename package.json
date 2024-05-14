@@ -56,6 +56,7 @@
 		"nutzlich": "^0.0.1",
 		"svelte-floating-ui": "^1.5.8",
 		"svocal": "^0.2.2",
-		"ua-parser-js": "^1.0.37"
+		"ua-parser-js": "^1.0.37",
+		"zod": "^3.23.8"
 	}
 }

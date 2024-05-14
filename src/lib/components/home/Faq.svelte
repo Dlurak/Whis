@@ -23,9 +23,9 @@
 		<AccordionItem>
 			<span slot="summary" class="font-bold">Can chats from other programms be analyzed?</span>
 			<span slot="content">
-				<b>Not yet</b> Soon it will be possible to open files exported from other programms directly.
-				If you are a developer you can write a programm to transform a file into WhatsApps text based
-				system
+				✅ <b>Yes!</b> Currently Whis can analyze chats exported from WhatsApp (both android or ios)
+				as well as chats from Element. <br />
+				If you are a developer you can implement a custom parser for another program and open a pr {`<3`}
 			</span>
 		</AccordionItem>
 	</Accordion>

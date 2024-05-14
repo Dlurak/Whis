@@ -21,7 +21,7 @@
 		<FileDropzone
 			name="file"
 			multiple={false}
-			accept=".txt"
+			accept=".txt, .json"
 			regionInterfaceText="flex flex-col items-center justify-center gap-2"
 			on:change={(e) => {
 				/**
