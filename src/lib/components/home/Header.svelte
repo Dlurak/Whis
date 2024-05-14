@@ -1,6 +1,6 @@
 <script>
 	import { messages, state } from '$lib';
-	import { parse } from '$lib/files/parseWhatsapp';
+	import { parse } from '$lib/parser';
 	import { readBlob } from '$lib/files/readFile';
 	import { ArrowUpTray, Icon } from 'svelte-hero-icons';
 	import { FileDropzone } from '@skeletonlabs/skeleton';
@@ -34,7 +34,8 @@
 				state.set('loading');
 				readBlob(files[0])
 					.then((content) => {
-						messages.set(parse(content));
+						const parsed = parse(content);
+						messages.set(parsed);
 						state.set('finished');
 					})
 					.catch(() => {

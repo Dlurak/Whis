@@ -1,3 +1,4 @@
+import type { Message } from '.';
 import {
 	AUDIO_OMITTED_ENGLISH,
 	AUDIO_OMITTED_GERMAN,
@@ -20,13 +21,18 @@ import {
 const regex =
 	/.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] (([^:]+)|(@[a-z]+:[a-z]+\.[a-z]+)):(.*)/s;
 
-export function parse(chat: string) {
+export function isIosWhatsappChat(chat: string) {
+	const msgStrings = chat.split('\r\n').filter((i) => i);
+
+	return msgStrings.every((s) => regex.test(s));
+}
+
+export function parseIos(chat: string) {
 	const msgStrings = chat.split('\r\n').filter((i) => i);
 
 	const messages = msgStrings.map((msg) => {
 		const match = msg.match(regex);
 		if (!match) {
-			console.log(msg);
 			throw new Error('uprocessable');
 		}
 
@@ -78,18 +84,3 @@ export function parse(chat: string) {
 
 	return messages;
 }
-
-export type TextMessage = {
-	type: 'message';
-	date: Date;
-	author: string;
-	message: string;
-};
-
-export type SpecialMsg = {
-	type: 'sticker' | 'gif' | 'image' | 'video' | 'audio' | 'deleted' | 'end-to-end';
-	date: Date;
-	author: string;
-};
-
-export type Message = TextMessage | SpecialMsg;
