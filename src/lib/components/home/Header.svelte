@@ -11,7 +11,7 @@
 		<h1 class="text-center font-extrabold italic text-white">Whis</h1>
 
 		<div class="flex items-center justify-center text-3xl text-gray-600">
-			<span class="max-w-96 hyphens-auto break-words">
+			<span class="max-w-96 hyphens-auto break-words px-3">
 				The best way to analyze your WhatsApp chats!
 			</span>
 		</div>
