@@ -22,7 +22,17 @@ export function parseAndroid(chat: string) {
 	const messages = [...matches].map((msg) => {
 		const [_, timeString, author, rawContent] = msg;
 		const content = rawContent.slice(0, -1);
-		const date = new Date(timeString);
+		const [__, dayStr, monthStr, yearStr, hourStr, minStr] = timeString.match(
+			/(\d{2})\.(\d{2})\.(\d{2}), (\d{2}):(\d{2})/
+		)!;
+
+		const date = new Date(
+			parseInt(yearStr) + 2_000,
+			parseInt(monthStr) - 1,
+			parseInt(dayStr),
+			parseInt(hourStr),
+			parseInt(minStr)
+		);
 
 		switch (content) {
 			case '<Medien ausgeschlossen>':
