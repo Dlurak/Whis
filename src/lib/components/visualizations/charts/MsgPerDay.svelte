@@ -17,12 +17,12 @@
 
 	export let messages: Message[];
 
-	const authors = removeDuplicates(messages.map(({ author }) => author));
-	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
+	$: authors = removeDuplicates(messages.map(({ author }) => author));
+	$: authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
 
-	const messageDates = messages.map(({ date }) => date).sort((a, b) => a.getTime() - b.getTime());
+	$: messageDates = messages.map(({ date }) => date).sort((a, b) => a.getTime() - b.getTime());
 
-	const filledData = promisify(() => {
+	$: filledData = promisify(() => {
 		const times = createDateList(messageDates[0], messageDates[messageDates.length - 1]).map(
 			stringify
 		);
@@ -37,7 +37,7 @@
 		};
 	});
 
-	const normalData = promisify(() => {
+	$: normalData = promisify(() => {
 		const times = messageDates.map(stringify);
 
 		return {

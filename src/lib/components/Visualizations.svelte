@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Message } from '$lib/files/parseWhatsapp';
+	import type { Message } from '$lib/parser';
 	import { multiplyUntilLength } from '$lib/utils/arrays/length';
 	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';
 	import { colors } from '$lib/utils/colors/colors';
@@ -16,6 +16,7 @@
 	import MsgPerTime from './visualizations/charts/MsgPerTime.svelte';
 	import Wordcloud from './visualizations/charts/Wordcloud.svelte';
 	import { countsPerAuthor } from '$lib/analyze/wordCloud';
+	import WordSearch from './visualizations/WordSearch/WordSearch.svelte';
 
 	export let messages: Message[];
 
@@ -64,5 +65,7 @@
 				<div class="col-span-1 sm:col-span-2 md:col-span-3"><MsgPerTime {messages} /></div>
 			</div>
 		</section>
+
+		<WordSearch {messages} {wordcounts} />
 	</div>
 </div>
