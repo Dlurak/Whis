@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { Message } from '.';
+import type { Message } from './types';
 
 const getJsonEncoded = <T>(data: string) => {
 	try {

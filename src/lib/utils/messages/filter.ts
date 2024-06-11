@@ -1,5 +1,9 @@
-import type { Message, TextMessage } from '$lib/files/parseWhatsapp';
+import type { Message, TextMessage } from '$lib/parser/types';
+
+function isTextMsg(msg: Message): msg is TextMessage {
+	return msg.type === 'message';
+}
 
 export const filterMsges = (msges: Message[]) => {
-	return msges.filter(({ type }) => type === 'message') as TextMessage[];
+	return msges.filter(isTextMsg);
 };

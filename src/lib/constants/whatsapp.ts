@@ -23,3 +23,9 @@ export const VIDEO_OMITTED_GERMAN = 'video omitted'; // TODO: localization
 
 export const GIF_OMITTED_ENGLISH = 'GIF omitted';
 export const GIF_OMITTED_GERMAN = 'GIF omitted'; // TODO: localization
+
+export const CONTACT_OMMITED_ENGLISH = 'Contact card omitted';
+export const CONTACT_OMMITED_GERMAN = 'Contact card omitted'; // TODO: localization
+
+export const LOCATION_START_ENGLISH = 'Location: ';
+export const LOCATION_START_GERMAN = 'Location: '; // TODO: localization

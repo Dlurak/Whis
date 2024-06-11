@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Message } from '$lib/files/parseWhatsapp';
+	import type { Message } from '$lib/parser/types';
 	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';
 	import { colors } from '$lib/utils/colors/colors';
 	import { DAY_IN_MS, convertMillisecs } from '$lib/utils/dates/convert';

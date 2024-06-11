@@ -1,5 +1,5 @@
 import { URL_REGEX } from '$lib/constants/regex';
-import type { Message } from '$lib/files/parseWhatsapp';
+import type { Message } from '$lib/parser/types';
 import { countObj } from '$lib/utils/strings/words';
 
 interface WordCloudProps {

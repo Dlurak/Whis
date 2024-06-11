@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { perTime } from '$lib/analyze/perTime';
 	import { MONTHS, type Month } from '$lib/constants/dates/months';
-	import type { Message } from '$lib/files/parseWhatsapp';
+	import type { Message } from '$lib/parser/types';
 	import { multiplyUntilLength } from '$lib/utils/arrays/length';
 	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';
 	import { colors } from '$lib/utils/colors/colors';

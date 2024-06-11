@@ -1,4 +1,4 @@
-import type { Message } from '.';
+import type { Message } from './types';
 
 const regex =
 	/^(\d{2}\.\d{2}\.\d{2}, \d{2}:\d{2}) - (?:([^\n:]*):)? (.*?)(?=^\d{2}\.\d{2}\.\d{2}, \d{2}:\d{2} - )/gms;

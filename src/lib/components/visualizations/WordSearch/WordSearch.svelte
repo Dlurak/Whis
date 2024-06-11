@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Message } from '$lib/parser';
+	import type { Message } from '$lib/parser/types';
 	import Diagram from './Diagram.svelte';
 
 	export let messages: Message[];
@@ -33,9 +33,6 @@
 	</div>
 
 	{#if isApplied}
-		<Diagram
-			search={searchingFor}
-			{messages}
-		/>
+		<Diagram search={searchingFor} {messages} />
 	{/if}
 </section>

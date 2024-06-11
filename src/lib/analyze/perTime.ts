@@ -1,4 +1,4 @@
-import type { Message } from '$lib/files/parseWhatsapp';
+import type { Message } from '$lib/parser/types';
 import { removeSortedDuplicates } from '$lib/utils/arrays/removeDuplicates';
 
 interface PerTimeProps<T extends string> {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Message } from '$lib/files/parseWhatsapp';
+	import type { Message } from '$lib/parser/types';
 
 	export let messages: Message[];
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Message } from '$lib/files/parseWhatsapp';
+	import type { Message } from '$lib/parser/types';
 	import '@carbon/charts-svelte/styles.css';
 	import { LineChart, ScaleTypes } from '@carbon/charts-svelte';
 	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';

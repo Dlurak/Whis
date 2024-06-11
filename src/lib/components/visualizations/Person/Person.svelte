@@ -1,5 +1,19 @@
+<script lang="ts" context="module">
+	function extractSpecials(
+		specialTypes: Partial<Record<Message['type'], string>>,
+		msges: Message[]
+	) {
+		return Object.entries(specialTypes)
+			.map(([t, userFacing]) => ({
+				userFacing,
+				amount: msges.filter(({ type }) => type === t).length
+			}))
+			.filter(({ amount }) => amount > 0);
+	}
+</script>
+
 <script lang="ts">
-	import type { Message } from '$lib/files/parseWhatsapp';
+	import type { Message } from '$lib/parser/types';
 	import { countWords } from '$lib/utils/strings/words';
 	import { average, sum } from '$lib/utils/numbers/arthimethic';
 	import { count } from '$lib/utils/arrays/count';
@@ -50,8 +64,17 @@
 
 	const emojiAmount = svocal('amountEmoji');
 
-	const voiceAmount = msges.filter(({ type }) => type === 'audio').length;
-	const stickerAmount = msges.filter(({ type }) => type === 'sticker').length;
+	const specialTypes: Partial<Record<Message['type'], string>> = {
+		audio: 'Voice Messages',
+		sticker: 'Sticker',
+		deleted: 'Deleted',
+		poll: 'Polls',
+		location: 'Locations',
+		gif: 'Gifs',
+		image: 'Images',
+		video: 'Videos',
+		contact: 'Contacts'
+	};
 </script>
 
 <div class="w-full rounded-sm p-4 outline outline-2 outline-gray-300">
@@ -87,8 +110,11 @@
 			</li>
 		{/if}
 		<li>Longest message: <b>{longestLength}</b> Words</li>
-		<li>Voice Messages: <b>{voiceAmount}</b></li>
-		<li>Stickers: <b>{stickerAmount}</b></li>
+
+		{#each extractSpecials(specialTypes, msges) as { userFacing, amount }}
+			<li>{userFacing}: <b>{amount}</b></li>
+		{/each}
+
 		<li>Average words per message: <b>{Math.round(average(msgLengths) * 10) / 10}</b></li>
 		<li>Wordstock (unique words used): <b>{fmt(wordcount)}</b></li>
 	</ul>

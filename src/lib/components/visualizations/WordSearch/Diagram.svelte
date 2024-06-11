@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Message } from '$lib/parser';
+	import type { Message } from '$lib/parser/types';
 	import MsgPerDay from '../charts/MsgPerDay.svelte';
 
 	export let search: string;
