@@ -20,7 +20,7 @@
 
 	import { parse } from '@devsnowflake/text-emoji-parser';
 	import { blackOrWhiteText } from '$lib/utils/colors/contrast';
-	import { emoticon } from 'emoticon';
+	import { emoticon, type Emoticon } from 'emoticon';
 	import { regexFromStr } from '$lib/utils/strings/regex';
 	import Emoji from './Emoji.svelte';
 	import { svocal } from '$lib/utils/svocal';
@@ -52,7 +52,24 @@
 		.sort((a, b) => b[1] - a[1])
 		.map(([i]) => i);
 
-	const emoticonsRegexes = emoticon.flatMap((e) => e.emoticons).map(regexFromStr);
+	const allEmoticon: Emoticon[] = [
+		...emoticon,
+		{
+			name: 'heart',
+			emoji: '❤️',
+			tags: ['love'],
+			description: 'red heart',
+			emoticons: ['♡']
+		},
+		{
+			name: 'cry',
+			emoji: '😢',
+			tags: ['sad', 'tear'],
+			description: 'crying face',
+			emoticons: ['T-T']
+		}
+	];
+	const emoticonsRegexes = allEmoticon.flatMap((e) => e.emoticons).map(regexFromStr);
 	const emoticonMatchesUnsorted = emoticonsRegexes
 		.map((reg) => entireText.match(reg))
 		.filter((i) => i) as RegExpMatchArray[];
@@ -60,7 +77,7 @@
 	const emoticonMatches = emoticonMatchesUnsorted.sort((a, b) => b.length - a.length);
 
 	const findMetadata = (emoji: string) =>
-		emoticon.find(({ emoticons }) => emoticons.includes(emoji));
+		allEmoticon.find(({ emoticons }) => emoticons.includes(emoji));
 
 	const emojiAmount = svocal('amountEmoji');
 
@@ -75,8 +92,6 @@
 		video: 'Videos',
 		contact: 'Contacts'
 	};
-
-	console.log(emoticon)
 </script>
 
 <div class="w-full rounded-sm p-4 outline outline-2 outline-gray-300">
