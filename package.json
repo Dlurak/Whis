@@ -53,6 +53,7 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"emoticon": "^4.0.1",
+		"jszip": "^3.10.1",
 		"nutzlich": "^0.0.1",
 		"svelte-floating-ui": "^1.5.8",
 		"svocal": "^0.2.2",

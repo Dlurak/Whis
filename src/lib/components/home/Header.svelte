@@ -4,6 +4,8 @@
 	import { readBlob } from '$lib/files/readFile';
 	import { ArrowUpTray, Icon } from 'svelte-hero-icons';
 	import { FileDropzone } from '@skeletonlabs/skeleton';
+	import JSZip from 'jszip';
+	import { getFileFromZip } from '$lib/files/getFileFromZip';
 </script>
 
 <div class="flex flex-col items-center justify-center bg-emerald-400 pb-10">
@@ -21,18 +23,27 @@
 		<FileDropzone
 			name="file"
 			multiple={false}
-			accept=".txt, .json"
+			accept=".txt, .json, .zip"
 			regionInterfaceText="flex flex-col items-center justify-center gap-2"
-			on:change={(e) => {
-				/**
-				 * @type Blob[]
-				 */
+			on:change={async (e) => {
+				/** @type {HTMLInputElement | null} */
 				// @ts-ignore
-				const files = e.target?.files;
+				const target = e.target;
+
+				if (!target) return;
+				const files = target.files;
+				if (!files) return;
 				if (files.length < 1) return;
 
 				state.set('loading');
-				readBlob(files[0])
+
+				const file = files[0];
+				const isZip = file.name.endsWith('.zip');
+
+				const chatFile = isZip ? getFileFromZip(file, '_chat.txt') : Promise.resolve(file);
+
+				chatFile
+					.then(readBlob)
 					.then((content) => {
 						const parsed = parse(content);
 						messages.set(parsed);

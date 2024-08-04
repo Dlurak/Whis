@@ -75,6 +75,8 @@
 		video: 'Videos',
 		contact: 'Contacts'
 	};
+
+	console.log(emoticon)
 </script>
 
 <div class="w-full rounded-sm p-4 outline outline-2 outline-gray-300">
