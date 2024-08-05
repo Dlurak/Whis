@@ -60,13 +60,6 @@
 			tags: ['love'],
 			description: 'red heart',
 			emoticons: ['♡']
-		},
-		{
-			name: 'cry',
-			emoji: '😢',
-			tags: ['sad', 'tear'],
-			description: 'crying face',
-			emoticons: ['T-T']
 		}
 	];
 	const emoticonsRegexes = allEmoticon.flatMap((e) => e.emoticons).map(regexFromStr);
