@@ -29,3 +29,5 @@ export const CONTACT_OMMITED_GERMAN = 'Contact card omitted'; // TODO: localizat
 
 export const LOCATION_START_ENGLISH = 'Location: ';
 export const LOCATION_START_GERMAN = 'Location: '; // TODO: localization
+
+export const MSG_EDITED_END_ENGLISH = '<This message was edited>';

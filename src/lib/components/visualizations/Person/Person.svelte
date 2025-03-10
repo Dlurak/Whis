@@ -74,6 +74,8 @@
 
 	const emojiAmount = svocal('amountEmoji');
 
+	const editedMsgesCount = msges.filter((msg) => msg.type === 'message' && msg.isEdited).length;
+
 	const specialTypes: Partial<Record<Message['type'], string>> = {
 		audio: 'Voice Messages',
 		sticker: 'Sticker',
@@ -124,6 +126,9 @@
 		{#each extractSpecials(specialTypes, msges) as { userFacing, amount }}
 			<li>{userFacing}: <b>{amount}</b></li>
 		{/each}
+		{#if editedMsgesCount > 0}
+			<li>Edited: <b>{editedMsgesCount}</b></li>
+		{/if}
 
 		<li>Average words per message: <b>{Math.round(average(msgLengths) * 10) / 10}</b></li>
 		<li>Wordstock (unique words used): <b>{fmt(wordcount)}</b></li>

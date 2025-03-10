@@ -42,6 +42,7 @@ export function parseAndroid(chat: string) {
 		return {
 			date,
 			author,
+			isEdited: false,
 			type: 'message',
 			message: content
 		};

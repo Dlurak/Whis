@@ -87,7 +87,7 @@ export function parseElement(chat: string) {
 
 		switch (data.content.msgtype) {
 			case 'm.text':
-				return { ...baseReturn, type: 'message', message: data.content.body };
+				return { ...baseReturn, isEdited: false, type: 'message', message: data.content.body };
 			case 'm.video':
 				return { ...baseReturn, type: 'video' };
 			case 'm.audio':

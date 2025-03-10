@@ -1,5 +1,6 @@
 export type TextMessage = {
 	type: 'message';
+	isEdited: boolean
 	date: Date;
 	author: string;
 	message: string;
@@ -30,9 +31,19 @@ type PollMsg = {
 	};
 };
 
+type SpecialMsgType =
+	| 'sticker'
+	| 'gif'
+	| 'image'
+	| 'video'
+	| 'audio'
+	| 'deleted'
+	| 'end-to-end'
+	| 'contact';
+
 export type SpecialMsg =
 	| {
-			type: 'sticker' | 'gif' | 'image' | 'video' | 'audio' | 'deleted' | 'end-to-end' | 'contact';
+			type: SpecialMsgType;
 			date: Date;
 			author: string;
 	  }

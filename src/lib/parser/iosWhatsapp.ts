@@ -1,8 +1,24 @@
-import type { Message } from './types';
+import type { Message, TextMessage } from './types';
 import { parseSpecialMessage } from '$lib/parser/iosWhatsappSpecial';
+import { MSG_EDITED_END_ENGLISH } from '$lib/constants/whatsapp';
+import { parse } from '@devsnowflake/text-emoji-parser';
 
 const regex =
 	/.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] (([^:]+)|(@[a-z]+:[a-z]+\.[a-z]+)):(.*)/s;
+
+const SPECIAL_CHAR = String.fromCharCode(8206);
+
+// for easier multi language support
+const isEditedWithPostfix = (message: string, postfix: string) => {
+	return message.endsWith(SPECIAL_CHAR + postfix);
+};
+
+const isEdited = (message: string): [boolean, number] => {
+	if (isEditedWithPostfix(message, MSG_EDITED_END_ENGLISH)) {
+		return [true, 1 + MSG_EDITED_END_ENGLISH.length];
+	}
+	return [false, 0];
+};
 
 export function isIosWhatsappChat(chat: string) {
 	const msgStrings = chat.split('\r\n').filter((i) => i);
@@ -32,7 +48,7 @@ export function parseIos(chat: string) {
 			parseInt(parts[5])
 		);
 
-		const isSpecialMsg = message.charCodeAt(1) === 8206;
+		const isSpecialMsg = message === SPECIAL_CHAR;
 
 		const specialResult = isSpecialMsg
 			? parseSpecialMessage({
@@ -42,7 +58,17 @@ export function parseIos(chat: string) {
 				})
 			: null;
 
-		return specialResult ?? { date, author, message, type: 'message' };
+		const [msgIsEdited, postfixLength] = isEdited(message);
+		const msgContent = postfixLength > 0 ? message.slice(0, -postfixLength) : message;
+
+		const textMsg: TextMessage = {
+			date,
+			author,
+			message: msgContent,
+			isEdited: msgIsEdited,
+			type: 'message'
+		};
+		return specialResult ?? textMsg;
 	}) satisfies Message[];
 
 	return messages;
