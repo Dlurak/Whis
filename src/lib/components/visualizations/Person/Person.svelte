@@ -17,7 +17,7 @@
 	import { countWords } from '$lib/utils/strings/words';
 	import { average, sum } from '$lib/utils/numbers/arthimethic';
 	import { count } from '$lib/utils/arrays/count';
-
+	import { findMaxBy } from '$lib/utils/arrays/findMaxBy';
 	import { parse } from '@devsnowflake/text-emoji-parser';
 	import { blackOrWhiteText } from '$lib/utils/colors/contrast';
 	import { emoticon, type Emoticon } from 'emoticon';
@@ -25,6 +25,8 @@
 	import Emoji from './Emoji.svelte';
 	import { svocal } from '$lib/utils/svocal';
 	import { filterMsges } from '$lib/utils/messages/filter';
+	import { ADDITIONAL_EMOTICONS } from '$lib/constants/additionalEmoticons';
+	import Floating from '$lib/components/utils/Floating.svelte';
 
 	export let name: string;
 	export let color: string;
@@ -38,7 +40,7 @@
 
 	const msgLengths = filterMsges(msges).map(({ message }) => countWords(message));
 
-	const longestLength = msgLengths.sort((a, b) => b - a)[0];
+	const longestMessage = findMaxBy(filterMsges(msges), ({ message }) => countWords(message))!;
 
 	const totalWordCount = sum(msgLengths);
 	const totalWordCountFormatted = new Intl.NumberFormat('en').format(totalWordCount);
@@ -52,16 +54,7 @@
 		.sort((a, b) => b[1] - a[1])
 		.map(([i]) => i);
 
-	const allEmoticon: Emoticon[] = [
-		...emoticon,
-		{
-			name: 'heart',
-			emoji: '❤️',
-			tags: ['love'],
-			description: 'red heart',
-			emoticons: ['♡']
-		}
-	];
+	const allEmoticon: Emoticon[] = [...emoticon, ...ADDITIONAL_EMOTICONS];
 	const emoticonsRegexes = allEmoticon.flatMap((e) => e.emoticons).map(regexFromStr);
 	const emoticonMatchesUnsorted = emoticonsRegexes
 		.map((reg) => entireText.match(reg))
@@ -121,7 +114,16 @@
 				</b>
 			</li>
 		{/if}
-		<li>Longest message: <b>{longestLength}</b> Words</li>
+		<li>
+			Longest message:
+			<Floating opaque={false}>
+				<b slot="main">{countWords(longestMessage.message)}</b>
+				<svelte:fragment slot="floating">
+					{longestMessage.message}
+				</svelte:fragment>
+			</Floating>
+			Words
+		</li>
 
 		{#each extractSpecials(specialTypes, msges) as { userFacing, amount }}
 			<li>{userFacing}: <b>{amount}</b></li>
