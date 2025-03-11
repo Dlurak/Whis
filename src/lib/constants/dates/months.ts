@@ -12,17 +12,4 @@ export type Month =
 	| 'November'
 	| 'December';
 
-export const MONTHS = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December'
-] satisfies Month[];
+export const MONTHS: Date[] = Array.from({ length: 12 }, (_, i) => new Date(2020, i, 2));

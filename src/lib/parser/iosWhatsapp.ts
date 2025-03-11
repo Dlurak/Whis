@@ -1,7 +1,6 @@
 import type { Message, TextMessage } from './types';
 import { parseSpecialMessage } from '$lib/parser/iosWhatsappSpecial';
 import { MSG_EDITED_END_ENGLISH } from '$lib/constants/whatsapp';
-import { parse } from '@devsnowflake/text-emoji-parser';
 
 const regex =
 	/.?\[(\d{2}.\d{2}.\d{2}, \d{2}:\d{2}:\d{2})\] (([^:]+)|(@[a-z]+:[a-z]+\.[a-z]+)):(.*)/s;

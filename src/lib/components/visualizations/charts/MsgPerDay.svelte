@@ -13,9 +13,21 @@
 	import { stringify } from '$lib/utils/dates/serialize';
 	import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 	import { writable } from 'svelte/store';
-	import { parse } from '$lib/utils/dates/parse';
 
 	export let messages: Message[];
+
+	const stripTime = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+	const daysBetween = (date1: Date, date2: Date) => {
+		const d1 = stripTime(date1);
+		const d2 = stripTime(date2);
+
+		const diffTime = Math.abs(d2.getTime() - d1.getTime());
+		return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+	};
+	const isEqual = (smoothing: number) => (a: Date, b: Date) => {
+		const diff = daysBetween(a, b);
+		return diff <= smoothing;
+	};
 
 	$: authors = removeDuplicates(messages.map(({ author }) => author));
 	$: authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
@@ -23,37 +35,29 @@
 	$: messageDates = messages.map(({ date }) => date).sort((a, b) => a.getTime() - b.getTime());
 
 	$: filledData = promisify(() => {
-		const times = createDateList(messageDates[0], messageDates[messageDates.length - 1]).map(
-			stringify
-		);
-
+		const times = createDateList(messageDates[0], messageDates[messageDates.length - 1]);
+		// TODO: Make it dynamic
+		const smoothing = 6;
 		return {
 			data: perTime({
 				authors,
 				messages,
 				times,
+				isEqual: isEqual(smoothing),
+				smoothingCount: smoothing * 2 + 1,
 				timeCallback: stringify
 			})
 		};
 	});
 
-	$: normalData = promisify(() => {
-		const times = messageDates.map(stringify);
-
-		return {
-			data: perTime({
-				authors,
-				messages,
-				times,
-				timeCallback: stringify,
-				sort: (a, b) => {
-					const dateA = parse(a);
-					const dateB = parse(b);
-					return dateA.getTime() - dateB.getTime();
-				}
-			})
-		};
-	});
+	$: normalData = promisify(() => ({
+		data: perTime({
+			authors,
+			messages,
+			times: messageDates,
+			timeCallback: stringify
+		})
+	}));
 
 	const group = writable<'all' | 'active'>('all');
 </script>
