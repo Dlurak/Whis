@@ -51,7 +51,9 @@ const msgScheme = z.union([
 			z.object({ topic: z.string() }),
 			z.object({ history_visibility: z.string() }),
 			z.object({ guest_access: z.string() }),
-			z.object({ algorithm: z.string() })
+			z.object({ algorithm: z.string() }),
+			z.object({ msgtype: z.literal('m.bad.encrypted') }),
+			z.object({})
 		]),
 		origin_server_ts: z.number(),
 		sender: z.string()
@@ -62,18 +64,17 @@ const msgScheme = z.union([
 
 const scheme = z.object({ messages: z.array(msgScheme) });
 
-export function isElementChat(chat: string) {
-	const encoded = getJsonEncoded(chat);
-	if (!encoded[1]) return false;
+type ElementChat = z.infer<typeof scheme>;
 
-	console.log(scheme.safeParse(encoded[0]));
-	return scheme.safeParse(encoded[0]).success;
+export function decodeElementChat(chat: string): [null, false] | [ElementChat, true] {
+	const encoded = getJsonEncoded(chat);
+	if (!encoded[1]) return [null, false];
+
+	const result = scheme.safeParse(encoded[0]);
+	return result.success ? [result.data, true] : [null, false];
 }
 
-export function parseElement(chat: string) {
-	const encoded = JSON.parse(chat);
-	const parsed = scheme.parse(encoded).messages;
-
+export function parseElement({ messages: parsed }: ElementChat) {
 	const messages = parsed.map((msg) => {
 		const res = goodMsgScheme.safeParse(msg);
 		if (!res.success) return null;

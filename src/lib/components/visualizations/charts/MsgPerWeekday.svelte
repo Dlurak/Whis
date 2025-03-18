@@ -7,14 +7,14 @@
 	import { multiplyUntilLength } from '$lib/utils/arrays/length';
 	import { colors } from '$lib/utils/colors/colors';
 	import { weekday } from '$lib/utils/dates/serialize';
-	import { type Weekday, WEEKDAYS } from '$lib/constants/dates/weekdays';
+	import { WEEKDAYS } from '$lib/constants/dates/weekdays';
 	import { perTime } from '$lib/analyze/perTime';
 
 	export let messages: Message[];
 
 	const authors = removeDuplicates(messages.map(({ author }) => author));
 
-	const data = perTime<Weekday>({
+	const data = perTime({
 		authors,
 		times: WEEKDAYS,
 		messages,

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { perTime } from '$lib/analyze/perTime';
-	import { MONTHS, type Month } from '$lib/constants/dates/months';
+	import { MONTHS } from '$lib/constants/dates/months';
 	import type { Message } from '$lib/parser/types';
 	import { multiplyUntilLength } from '$lib/utils/arrays/length';
 	import { removeDuplicates } from '$lib/utils/arrays/removeDuplicates';
@@ -14,7 +14,7 @@
 	const authors = removeDuplicates(messages.map(({ author }) => author));
 	const authorColors = arraysToObj(authors, multiplyUntilLength(colors, authors.length));
 
-	const data = perTime<Month>({
+	const data = perTime({
 		authors,
 		times: MONTHS,
 		messages,

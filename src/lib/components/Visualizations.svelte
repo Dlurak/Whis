@@ -17,6 +17,8 @@
 	import Wordcloud from './visualizations/charts/Wordcloud.svelte';
 	import { countsPerAuthor } from '$lib/analyze/wordCloud';
 	import WordSearch from './visualizations/WordSearch/WordSearch.svelte';
+	import { page } from '$app/stores';
+	import { derived } from 'svelte/store';
 
 	export let messages: Message[];
 
@@ -27,6 +29,9 @@
 		authors,
 		messages
 	});
+
+	const extremeValue = derived(page, (p) => p.url.searchParams.get('extreme'))
+	const extremeModeEnabled = derived(extremeValue, (value) => (typeof value) === "string")
 </script>
 
 <div class="flex justify-center py-12">
@@ -41,17 +46,19 @@
 		<TimeRange {messages} />
 		<BigStats {messages} />
 
-		<div class="w-full">
-			<h2>Timeline of messages</h2>
+		{#if !$extremeModeEnabled}
+			<div class="w-full">
+				<h2>Timeline of messages</h2>
 
-			<MsgPerDay {messages} />
-		</div>
+				<MsgPerDay {messages} />
+			</div>
 
-		<div class="w-full">
-			<h2>Wordcloud</h2>
+			<div class="w-full">
+				<h2>Wordcloud</h2>
 
-			<Wordcloud counts={wordcounts} {authors} />
-		</div>
+				<Wordcloud counts={wordcounts} {authors} />
+			</div>
+		{/if}
 
 		<section class="w-full">
 			<h2>Messages per</h2>
@@ -60,9 +67,13 @@
 				class="grid w-full grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(min(20rem,100%),1fr))]"
 			>
 				<div><MsgPerPerson {messages} /></div>
-				<div><MsgPerMonth {messages} /></div>
+				{#if !$extremeModeEnabled}
+					<div><MsgPerMonth {messages} /></div>
+				{/if}
 				<div><MsgPerWeekday {messages} /></div>
-				<div class="col-span-1 sm:col-span-2 md:col-span-3"><MsgPerTime {messages} /></div>
+				{#if !$extremeModeEnabled}
+					<div class="col-span-1 sm:col-span-2 md:col-span-3"><MsgPerTime {messages} /></div>
+				{/if}
 			</div>
 		</section>
 
